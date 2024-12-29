@@ -395,33 +395,43 @@ def new_dispatch(method, threshold = 6):
 if __name__ == "__main__":
     
     # ONLY CHANGE THIS
-    method = "kisenix"
+    method = "no_reset"
     threshold = 6 #only for kisenix and gems_only, leave 6-7 for default
     convert_boxes_to_kits = True
     open_mileage_and_convert_blue_dolls_to_kits = True
+    add_solo_raid_rewards = True
+    total_days = 30
     simulation_times = 3000
     
     
     # DO NOT TOUCH
     print("Method used:", method)
-    
     print(helper.get_method_description(method, threshold), "\n")
-        
+       
+    print("Parameters:")
     if (convert_boxes_to_kits):
-        print("Boxes are converted into kits.\n")
+        print("• Boxes are converted into kits.")
     else:
-        print("Boxes are not converted into kits.\n")
+        print("• Boxes are not converted into kits.")
         
     if (open_mileage_and_convert_blue_dolls_to_kits):
-        print("Mileage boxes are opened and dolls are converted.\n")
+        print("• Mileage boxes are opened and dolls are converted.")
     else:
-        print("Mileage boxes are unopened and dolls are not converted.\n")
+        print("• Mileage boxes are unopened and dolls are not converted.")
         
+    if (add_solo_raid_rewards):
+        print("• Solo Raid rewards are added on top.")
+    else:
+        print("• Solo Raid rewards are not included.")
         
+    print()
+    
     for i in range(simulation_times):
         inventory = inventory.fromkeys(inventory, 0)
-        for j in range(30):
+        for j in range(total_days):
             new_dispatch(method, threshold)
+        if (add_solo_raid_rewards):
+            transfer_claimed_to_inventory([["r_doll", 7], ["sr_doll", 3], ["purple_box", 12], ["gold_box", 51]])
         if (convert_boxes_to_kits):
             convert_purple_box()
             convert_gold_box()
@@ -431,8 +441,8 @@ if __name__ == "__main__":
         for key, value in inventory.items():
             simulated_total_inventory[key] = simulated_total_inventory.get(key, 0) + value
     
-    print(f"Gems spent over 30 days (averaged over {simulation_times}x simulated runs):", gems_spent/simulation_times)
-    print(f"Items obtained over 30 days (averaged over {simulation_times}x simulated runs):")
+    print(f"Gems spent over {total_days} days (averaged over {simulation_times}x simulated runs):", gems_spent/simulation_times)
+    print(f"Items obtained over {total_days} days (averaged over {simulation_times}x simulated runs):")
     divided_data = {key: value / simulation_times for key, value in simulated_total_inventory.items()}
     
     for key, value in divided_data.items():
@@ -440,22 +450,24 @@ if __name__ == "__main__":
         
     print("Net gems earning:", divided_data.get("gems") - gems_spent/simulation_times)
     
-    if(method != "most_economic_route_6"):
-        print("\nADDITIONAL COMPARISON VS MOST ECONOMIC ROUTE 6\n")
-        keys_to_show = ["core_dust_hour", "credits_hour", "gold_kit", "purple_kit", "blue_kit"]
-        comparison = {key: divided_data[key] - cached_most_economic_route_result[key] for key in keys_to_show
-                      if key in divided_data and key in cached_most_economic_route_result}
-        for key, value in comparison.items():
-            print(f"- {key.replace('_', ' ').title()} = {value:+.2f}")
-        print("Net gems earning:", (divided_data.get("gems") - gems_spent/simulation_times) - cached_most_economic_route_result["gems"])
-            
-    if(method != "no_reset"):
-        print("\nADDITIONAL COMPARISON VS NO RESET\n")
-        keys_to_show = ["core_dust_hour", "credits_hour", "gold_kit", "purple_kit", "blue_kit"]
-        comparison = {key: divided_data[key] - cached_no_reset_result[key] for key in keys_to_show
-                      if key in divided_data and key in cached_no_reset_result}
-        for key, value in comparison.items():
-            print(f"- {key.replace('_', ' ').title()} = {value:+.2f}")
-        print("Net gems earning:", (divided_data.get("gems") - gems_spent/simulation_times) - cached_no_reset_result["gems"])
+    # solo raid rewards not cached yet
+    if (not add_solo_raid_rewards):
+        if(method != "most_economic_route_6"):
+            print("\nADDITIONAL COMPARISON VS MOST ECONOMIC ROUTE 6\n")
+            keys_to_show = ["core_dust_hour", "credits_hour", "gold_kit", "purple_kit", "blue_kit"]
+            comparison = {key: divided_data[key] - cached_most_economic_route_result[key] for key in keys_to_show
+                          if key in divided_data and key in cached_most_economic_route_result}
+            for key, value in comparison.items():
+                print(f"- {key.replace('_', ' ').title()} = {value:+.2f}")
+            print("Net gems earning:", (divided_data.get("gems") - gems_spent/simulation_times) - cached_most_economic_route_result["gems"])
+                
+        if(method != "no_reset"):
+            print("\nADDITIONAL COMPARISON VS NO RESET\n")
+            keys_to_show = ["core_dust_hour", "credits_hour", "gold_kit", "purple_kit", "blue_kit"]
+            comparison = {key: divided_data[key] - cached_no_reset_result[key] for key in keys_to_show
+                          if key in divided_data and key in cached_no_reset_result}
+            for key, value in comparison.items():
+                print(f"- {key.replace('_', ' ').title()} = {value:+.2f}")
+            print("Net gems earning:", (divided_data.get("gems") - gems_spent/simulation_times) - cached_no_reset_result["gems"])
         
     
