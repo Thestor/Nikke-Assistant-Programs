@@ -180,13 +180,10 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            i = 0
             for j in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-                i += 1
             for j in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
-                i += 1
             
             for index, item in enumerate(current_dispatch_list):
                 if item in please_doll_claim:
@@ -209,13 +206,10 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            i = 0
             for j in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-                i += 1
             for j in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
-                i += 1
             
             for index, item in enumerate(current_dispatch_list):
                 if item in please_doll_claim:
@@ -238,13 +232,11 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            i = 0
             for j in range(doll_unclaimed):
-                current_dispatch_list.append(doll_gacha())
-                i += 1
+                current_dispatch_list.append(doll_gacha())               
             for j in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
-                i += 1
+                
             
             if (any(item[0] == "gems" for item in current_dispatch_list)):
                 claimed_materials.extend(current_dispatch_list)
@@ -263,13 +255,10 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            i = 0
             for j in range(doll_unclaimed):
-                current_dispatch_list.append(doll_gacha())
-                i += 1
+                current_dispatch_list.append(doll_gacha())          
             for j in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
-                i += 1
             
             for index, item in enumerate(current_dispatch_list):
                 if item in please_doll_claim:
@@ -292,13 +281,10 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            i = 0
             for j in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-                i += 1
             for j in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
-                i += 1
             
             for index, item in enumerate(current_dispatch_list):
                 if item in please_doll_claim:
@@ -321,13 +307,10 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            i = 0
             for j in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-                i += 1
             for j in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
-                i += 1
             
             for index, item in enumerate(current_dispatch_list):
                 if item in please_doll_claim:
@@ -350,13 +333,10 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            i = 0
             for j in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-                i += 1
             for j in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
-                i += 1
             
             for index, item in enumerate(current_dispatch_list):
                 if item in please_doll_claim:
@@ -379,13 +359,10 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            i = 0
             for j in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-                i += 1
             for j in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
-                i += 1
             
             for index, item in enumerate(current_dispatch_list):
                 if item in please_doll_claim:
@@ -406,13 +383,10 @@ def new_dispatch(method, threshold = 6):
         
         current_dispatch_list = []
         
-        i = 0
         for j in range(doll_unclaimed):
             current_dispatch_list.append(doll_gacha())
-            i += 1
         for j in range(material_unclaimed):
             current_dispatch_list.append(material_gacha())
-            i += 1
         claimed_materials.extend(current_dispatch_list)
         
             
