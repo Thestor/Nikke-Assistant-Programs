@@ -303,34 +303,8 @@ def new_dispatch(method, threshold = 6):
         else:
             claimed_materials.extend(current_dispatch_list)
             
-    elif (method == "most_economic_route_6"):
-        while (material_unclaimed >= 6):
-        
-            gems_spent += 50
-            
-            current_dispatch_list = []
-            
-            for i in range(doll_unclaimed):
-                current_dispatch_list.append(doll_gacha())
-            for i in range(material_unclaimed):
-                current_dispatch_list.append(material_gacha())
-            
-            for index, item in enumerate(current_dispatch_list):
-                if item in please_doll_claim:
-                    claimed_materials.append(item)
-                    current_dispatch_list[index] = ["", 0]
-                    doll_unclaimed -= 1
-                    
-                elif item in please_material_claim:
-                    claimed_materials.append(item)
-                    current_dispatch_list[index] = ["", 0]
-                    material_unclaimed -= 1   
-                    
-        else:
-            claimed_materials.extend(current_dispatch_list)
-            
-    elif (method == "most_economic_route_5"):
-        while (material_unclaimed >= 5):
+    elif (method == "most_economic_route"):
+        while (material_unclaimed >= threshold):
         
             gems_spent += 50
             
@@ -399,7 +373,7 @@ if __name__ == "__main__":
     
     # ONLY CHANGE THIS
     method = "kisenix"
-    threshold = 6 #only for kisenix and gems_only, leave 6-7 for default
+    threshold = 6 #only for some algorithms
     convert_boxes_to_kits = True
     open_mileage_and_convert_blue_dolls_to_kits = True
     add_solo_raid_rewards = True
@@ -408,7 +382,7 @@ if __name__ == "__main__":
     
     
     # DO NOT TOUCH
-    print("Method used:", method)
+    print("Method used: " + method + f"_{threshold}")
     print(helper.get_method_description(method, threshold), "\n")
        
     print("Parameters:")
@@ -455,7 +429,7 @@ if __name__ == "__main__":
     
     # solo raid rewards not cached yet
     if (not add_solo_raid_rewards):
-        if(method != "most_economic_route_6"):
+        if(not (method == "most_economic_route" and threshold == 6)):
             print("\nADDITIONAL COMPARISON VS MOST ECONOMIC ROUTE 6\n")
             keys_to_show = ["core_dust_hour", "credits_hour", "gold_kit", "purple_kit", "blue_kit"]
             comparison = {key: divided_data[key] - cached_most_economic_route_result[key] for key in keys_to_show

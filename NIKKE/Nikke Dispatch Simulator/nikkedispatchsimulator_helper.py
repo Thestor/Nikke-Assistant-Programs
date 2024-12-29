@@ -30,16 +30,10 @@ def get_method_description(method_name, threshold = 0):
 • If sum of unclaimed material dispatches is 6 or above, then reroll immediately.
 • Repeat until condition is not satisfied, then claim all."""
 
-    elif (method_name == "most_economic_route_6"):
-        method_description = """• Take all doll dispatches that are at least B or above.
+    elif (method_name == "most_economic_route"):
+        method_description = f"""• Take all doll dispatches that are at least B or above.
 • Take all gems, core dust, and credit dispatches.
-• If sum of unclaimed material dispatches is 6 or above, then reroll immediately.
-• Repeat until condition is not satisfied, then claim all."""
-
-    elif (method_name == "most_economic_route_5"):
-        method_description = """• Take all doll dispatches that are at least B or above.
-• Take all gems, core dust, and credit dispatches.
-• If sum of unclaimed material dispatches is 5 or above, then reroll immediately.
+• If sum of unclaimed material dispatches is {threshold} or above, then reroll immediately.
 • Repeat until condition is not satisfied, then claim all."""
 
     elif (method_name == "kira"):
