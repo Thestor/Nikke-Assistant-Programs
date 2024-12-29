@@ -200,7 +200,10 @@ def new_dispatch(method, threshold = 6):
             claimed_materials.extend(current_dispatch_list)
             
     elif (method == "kisenix_cheaper"):
-        while (doll_unclaimed + material_unclaimed >= 7 or (doll_unclaimed == 1 and material_unclaimed >= 5)):
+        while (material_unclaimed >= 6 or
+               (material_unclaimed == 5 and doll_unclaimed >= 1) or
+               (material_unclaimed == 4 and doll_unclaimed >= 3) or
+               (material_unclaimed == 3 and doll_unclaimed == 4)):
         
             gems_spent += 50
             
@@ -395,13 +398,13 @@ def new_dispatch(method, threshold = 6):
 if __name__ == "__main__":
     
     # ONLY CHANGE THIS
-    method = "no_reset"
+    method = "kisenix"
     threshold = 6 #only for kisenix and gems_only, leave 6-7 for default
     convert_boxes_to_kits = True
     open_mileage_and_convert_blue_dolls_to_kits = True
     add_solo_raid_rewards = True
     total_days = 30
-    simulation_times = 3000
+    simulation_times = 10000
     
     
     # DO NOT TOUCH

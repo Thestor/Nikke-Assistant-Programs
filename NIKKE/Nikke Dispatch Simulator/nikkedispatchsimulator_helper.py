@@ -11,7 +11,7 @@ def get_method_description(method_name, threshold = 0):
     elif (method_name == "kisenix_cheaper"):
         method_description = """• Take all doll dispatches that are at least B or above.
 • Take all gems, core dust, and credit dispatches.
-• If sum of unclaimed doll dispatches + material dispatches is 7 or above (or 6 if 1 doll), then reroll immediately.
+• Reset algorithm varies depending on number of open slots type.
 • Repeat until condition is not satisfied, then claim all."""
 
     elif (method_name == "akusetsu"):
