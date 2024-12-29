@@ -180,9 +180,9 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            for j in range(doll_unclaimed):
+            for i in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-            for j in range(material_unclaimed):
+            for i in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
             
             for index, item in enumerate(current_dispatch_list):
@@ -206,9 +206,9 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            for j in range(doll_unclaimed):
+            for i in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-            for j in range(material_unclaimed):
+            for i in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
             
             for index, item in enumerate(current_dispatch_list):
@@ -232,9 +232,9 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            for j in range(doll_unclaimed):
+            for i in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())               
-            for j in range(material_unclaimed):
+            for i in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
                 
             
@@ -255,9 +255,9 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            for j in range(doll_unclaimed):
+            for i in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())          
-            for j in range(material_unclaimed):
+            for i in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
             
             for index, item in enumerate(current_dispatch_list):
@@ -281,9 +281,9 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            for j in range(doll_unclaimed):
+            for i in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-            for j in range(material_unclaimed):
+            for i in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
             
             for index, item in enumerate(current_dispatch_list):
@@ -307,9 +307,9 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            for j in range(doll_unclaimed):
+            for i in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-            for j in range(material_unclaimed):
+            for i in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
             
             for index, item in enumerate(current_dispatch_list):
@@ -333,9 +333,9 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            for j in range(doll_unclaimed):
+            for i in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-            for j in range(material_unclaimed):
+            for i in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
             
             for index, item in enumerate(current_dispatch_list):
@@ -359,9 +359,9 @@ def new_dispatch(method, threshold = 6):
             
             current_dispatch_list = []
             
-            for j in range(doll_unclaimed):
+            for i in range(doll_unclaimed):
                 current_dispatch_list.append(doll_gacha())
-            for j in range(material_unclaimed):
+            for i in range(material_unclaimed):
                 current_dispatch_list.append(material_gacha())
             
             for index, item in enumerate(current_dispatch_list):
@@ -383,9 +383,9 @@ def new_dispatch(method, threshold = 6):
         
         current_dispatch_list = []
         
-        for j in range(doll_unclaimed):
+        for i in range(doll_unclaimed):
             current_dispatch_list.append(doll_gacha())
-        for j in range(material_unclaimed):
+        for i in range(material_unclaimed):
             current_dispatch_list.append(material_gacha())
         claimed_materials.extend(current_dispatch_list)
         
