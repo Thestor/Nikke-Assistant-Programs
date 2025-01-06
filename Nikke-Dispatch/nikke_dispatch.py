@@ -19,6 +19,12 @@ def get_method_description(method_name, threshold = 0):
 • Reset algorithm varies depending on number of open slots type.
 • Repeat until condition is not satisfied, then claim all."""
 
+    elif method_name == "kisenix_more_expensive":
+        return """• Take all doll dispatches that are at least B or above.
+• Take all gems, core dust, and credit dispatches.
+• Reset algorithm varies depending on number of open slots type.
+• Repeat until condition is not satisfied, then claim all."""
+
     elif method_name == "akusetsu":
         return """• Take all doll dispatches that are at least B or above.
 • If there is at least 1 gem dispatch, take all."""
@@ -336,6 +342,14 @@ def new_dispatch(inventory: dict, method: str, threshold: int=6):
             lambda item: item in please_doll_claim,
             lambda item: item in please_material_claim,
         ],
+        'kisenix_more_expensive': [
+            None,
+            lambda: (material_unclaimed >= 5 or
+               (material_unclaimed == 4 and doll_unclaimed >= 3) or
+               (material_unclaimed == 3 and doll_unclaimed == 4)),
+            lambda item: item in please_doll_claim,
+            lambda item: item in please_material_claim,
+        ],
         'akusetsu': [
             lambda: any(item[0] == 'gems' for item in mat_dispatch),
             lambda: True,
@@ -422,7 +436,7 @@ def new_dispatch(inventory: dict, method: str, threshold: int=6):
 def main():
     """Main function."""
     # ONLY CHANGE THIS
-    method = 'kisenix'
+    method = 'kisenix_more_expensive'
     threshold = 6 #only for some algorithms
     convert_boxes_to_kits = True
     open_mileage_and_convert_blue_dolls_to_kits = True
