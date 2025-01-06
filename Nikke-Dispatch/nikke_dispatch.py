@@ -313,17 +313,20 @@ def transfer_claimed_to_inventory(inventory: dict, claimed_materials: list[tuple
         inventory[item_type] += quantity
 
 
-def new_dispatch(inventory: dict, method: str, threshold: int=6):
+def new_dispatch(inventory: dict, method: str, threshold: int=6, doll_unclaimed: int=4, material_unclaimed: int=10, trash_only_scenario: bool=False):
     """Runs the dispatch simulation, adding the results to inventory and returning
     the number of times dispatch was reset.
     """
-    doll_unclaimed = 4
-    material_unclaimed = 10
+    
     num_resets = 0
 
-    # Initial dispatches
-    doll_dispatch = doll_gacha(doll_unclaimed)
-    mat_dispatch = material_gacha(material_unclaimed)
+    # Initial dispatches (if trash_only_scenario is True, then insert it with garbage)
+    if (trash_only_scenario):
+        doll_dispatch = ['blue_kit', 2] * doll_unclaimed
+        mat_dispatch = ['r_boost_module', 10] * material_unclaimed
+    else:
+        doll_dispatch = doll_gacha(doll_unclaimed)
+        mat_dispatch = material_gacha(material_unclaimed)
 
     # Map of method to break, reset, doll claim, and material claim conditons
     method_func_map = {
@@ -435,12 +438,18 @@ def new_dispatch(inventory: dict, method: str, threshold: int=6):
 
 def main():
     """Main function."""
+
     # ONLY CHANGE THIS
-    method = 'kisenix_more_expensive'
+    method = 'kisenix'
     threshold = 6 #only for some algorithms
+    doll_unclaimed = 4
+    material_unclaimed = 10
+    trash_only_scenario = False
+
     convert_boxes_to_kits = True
     open_mileage_and_convert_blue_dolls_to_kits = True
     add_solo_raid_rewards = False
+
     total_days = 1
     num_sims = 10000
 
@@ -450,6 +459,10 @@ def main():
     print(get_method_description(method, threshold), "\n")
 
     print("Parameters:")
+    if trash_only_scenario:
+        print(f"• Starting list of {doll_unclaimed} doll and {material_unclaimed} material dispatches containing trash only.")
+    else:
+        print(f"• Starting list of {doll_unclaimed} doll and {material_unclaimed} material dispatches.")
     if convert_boxes_to_kits:
         print("• Boxes are converted into kits.")
     else:
@@ -476,7 +489,7 @@ def main():
     for sim_idx in range(num_sims):
         inventory = get_empty_inventory()
         for _ in range(total_days):
-            num_reset_samples[sim_idx] += new_dispatch(inventory, method, threshold)
+            num_reset_samples[sim_idx] += new_dispatch(inventory, method, threshold, doll_unclaimed, material_unclaimed, trash_only_scenario)
         if add_solo_raid_rewards:
             transfer_claimed_to_inventory(inventory, SOLO_RAID_DROPS)
         if convert_boxes_to_kits:
