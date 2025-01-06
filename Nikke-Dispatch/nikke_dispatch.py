@@ -313,15 +313,15 @@ def transfer_claimed_to_inventory(inventory: dict, claimed_materials: list[tuple
         inventory[item_type] += quantity
 
 
-def new_dispatch(inventory: dict, method: str, threshold: int=6, doll_unclaimed: int=4, material_unclaimed: int=10, trash_only_scenario: bool=False):
+def new_dispatch(inventory: dict, method: str, threshold: int=6, doll_unclaimed: int=4, material_unclaimed: int=10, start_with_trash_only: bool=False):
     """Runs the dispatch simulation, adding the results to inventory and returning
     the number of times dispatch was reset.
     """
-    
+
     num_resets = 0
 
     # Initial dispatches (if trash_only_scenario is True, then insert it with garbage)
-    if (trash_only_scenario):
+    if (start_with_trash_only):
         doll_dispatch = ['blue_kit', 2] * doll_unclaimed
         mat_dispatch = ['r_boost_module', 10] * material_unclaimed
     else:
@@ -444,7 +444,7 @@ def main():
     threshold = 6 #only for some algorithms
     doll_unclaimed = 4
     material_unclaimed = 10
-    trash_only_scenario = False
+    start_with_trash_only = False
 
     convert_boxes_to_kits = True
     open_mileage_and_convert_blue_dolls_to_kits = True
@@ -459,7 +459,7 @@ def main():
     print(get_method_description(method, threshold), "\n")
 
     print("Parameters:")
-    if trash_only_scenario:
+    if start_with_trash_only:
         print(f"• Starting list of {doll_unclaimed} doll and {material_unclaimed} material dispatches containing trash only.")
     else:
         print(f"• Starting list of {doll_unclaimed} doll and {material_unclaimed} material dispatches.")
@@ -489,7 +489,7 @@ def main():
     for sim_idx in range(num_sims):
         inventory = get_empty_inventory()
         for _ in range(total_days):
-            num_reset_samples[sim_idx] += new_dispatch(inventory, method, threshold, doll_unclaimed, material_unclaimed, trash_only_scenario)
+            num_reset_samples[sim_idx] += new_dispatch(inventory, method, threshold, doll_unclaimed, material_unclaimed, start_with_trash_only)
         if add_solo_raid_rewards:
             transfer_claimed_to_inventory(inventory, SOLO_RAID_DROPS)
         if convert_boxes_to_kits:
